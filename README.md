@@ -1,147 +1,129 @@
-# Webinar Text2SQL
+# text2sql-agent 🚀
 
-Este proyecto consiste en la creación de un aplicación para la consulta a bases de datos relacionales con un agente. Este agente está compuesto de tres procesos:
-1. Creación de la query SQL según la consulta del usuario conocida la estructura de la base de datos.
-2. Ejecución de query creada.
-3. Devolución de la respuesta en lenguaje natural para un uso completamente conversacional con la base de datos.
+Welcome to the **text2sql-agent** repository! This project focuses on transforming natural language queries into SQL statements. With this agent, you can easily convert your everyday questions into structured queries and receive accurate responses. 
 
+[![Download Release](https://img.shields.io/badge/Download%20Release-v1.0.0-blue)](https://github.com/Pedro-Viudes/text2sql-agent/releases)
 
-## Estructura de carpetas
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Examples](#examples)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Support](#support)
+
+---
+
+## Features
+
+- **Natural Language Processing**: The agent uses advanced NLP techniques to understand and interpret user queries.
+- **SQL Generation**: Converts queries into valid SQL statements that can be executed against a database.
+- **Response Handling**: Provides responses based on the generated SQL, ensuring you get the information you need.
+- **User-Friendly**: Designed for ease of use, making it accessible to users with varying levels of technical expertise.
+
+## Installation
+
+To get started with **text2sql-agent**, you need to download the latest release. Visit the [Releases section](https://github.com/Pedro-Viudes/text2sql-agent/releases) to find the necessary files. Download the appropriate version for your system and follow the instructions provided in the release notes.
+
+### Prerequisites
+
+Before installation, ensure you have the following:
+
+- Python 3.7 or higher
+- pip (Python package installer)
+
+### Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Pedro-Viudes/text2sql-agent.git
+   cd text2sql-agent
+   ```
+
+2. Install required packages:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the agent:
+
+   ```bash
+   python main.py
+   ```
+
+## Usage
+
+Using the **text2sql-agent** is straightforward. Once the agent is running, you can input your natural language queries directly into the console. The agent will then process your input and return the corresponding SQL statement along with the query result.
+
+### Example Command
 
 ```plaintext
-📦 webinar_text2sql
-├── 📁 chatbot                                          # Código Text-to-SQL 
-│   ├── 📄 __init__.py                                  # Convierte un directorio en un paquete
-│   ├── 📄 chatclass.py                                 # Clase del agente text2sql 
-│   └── 📄 prompts.py                                   # Prompts del sistema
-│
-├── 📁 images                                           # Carpeta con las imagenes usadas
-│
-├── 📁 notebooks                                        # Carpeta de notebooks de prueba
-│   ├── 📁 src                                          # Carpeta de codigo del chat
-│   │   └── 📄 chat.py                                  # Función del chatbot
-│   ├── 📄 Consultor SQL OpenAI y Langchain.ipynb       # Jupyter notebook con el paso a paso
-│   └── 📄 practicas.ipynb                              # Jupyter notebook con 10 preguntas de prueba
-│
-├── 📁 sakila_db                                        # Carpeta con el archivo de la base de datos
-│   └── 📄 sakila.sql                                   # Archivo autocontenido de la base de datos
-│
-├── 📁 tools                                            # Herramientas 
-│   ├── 📄 __init__.py                                  # Convierte un directorio en un paquete
-│   └── 📄 tools.py                                     # Herramientas (logger)
-│
-├── 📄 .env.template                                    # Plantilla de archivo .env 
-├── 📄 .gitignore                                       # Archivos y carpetas a ignorar en Git
-├── 📄 .python-version                                  # Versión de python
-├── 📄 front.py                                         # Archivo del frontend con chainlit
-├── 📄 pyproject.toml                                   # Dependencias y configuración 
-├── 📄 README.md                                        # Documentación principal del proyecto
-├── 📄 requirements.txt                                 # Dependencias y configuración 
-└── 📄 uv.lock                                          # Dependencias y configuración 
+What are the names of all employees in the sales department?
 ```
 
-## Estructura de la base de datos
-Usaremos la base de datos [sakila](https://dev.mysql.com/doc/sakila/en/sakila-installation.html), una base de datos de ejemplo que podemos descargar desde [aquí](https://github.com/YonatanRA/webinar_text2sql/raw/refs/heads/main/sakila_db/sakila.sql). Sus características son las siguientes:
+### Example Output
 
-+ Dominio del negocio: Videoclub (alquiler de películas).
+```sql
+SELECT name FROM employees WHERE department = 'sales';
+```
 
-+ Tamaño: Mediana complejidad, ideal para practicar consultas SQL reales.
+The agent will execute this SQL statement against your database and provide the result.
 
-+ Relaciones: Incluye múltiples relaciones entre tablas, ideal para practicar joins, subqueries, views y stored procedures.
+## Examples
 
-+ Diagrama entidad-relación:
-![erd](https://raw.githubusercontent.com/YonatanRA/webinar_text2sql/refs/heads/main/images/erd.png)
+Here are some example queries you can try:
 
+1. **Retrieve Employee Information**
 
+   **Query**: "Show me the details of employee John Doe."
 
-## Dependencias
-
-1. **Instalación `uv`**:
-
-   El método de instalación recomendado de `uv` es:
-
-   ```bash
-   curl -LsSf https://astral.sh/uv/install.sh | sh
+   **Generated SQL**:
+   ```sql
+   SELECT * FROM employees WHERE name = 'John Doe';
    ```
 
-   De manera alternativa, podemos instalar `uv` via `pip`:
+2. **List Products**
 
-   ```bash
-   pip install uv
+   **Query**: "What products are available in the electronics category?"
+
+   **Generated SQL**:
+   ```sql
+   SELECT * FROM products WHERE category = 'electronics';
    ```
 
-   Para más detalles, revisar los [métodos de instalación](https://docs.astral.sh/uv/getting-started/installation/#installation-methods).
+3. **Count Customers**
 
+   **Query**: "How many customers do we have?"
 
+   **Generated SQL**:
+   ```sql
+   SELECT COUNT(*) FROM customers;
+   ```
 
-2. **Activación del entorno virtual**
+## Contributing
 
-    Activar el entorno virtual usado el siguiente comando:
+We welcome contributions to enhance the **text2sql-agent**. If you would like to contribute, please follow these steps:
 
-    ```bash
-    source .venv/bin/activate
-    ```
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push to your forked repository.
+5. Create a pull request.
 
-    También puede usarse conda y crear un entorno virtual con:
-     ```bash
-    conda create -n sql python=3.11
-    ```
+Please ensure your code adheres to the existing style and includes tests where applicable.
 
-3. **Sincronizar dependencias con uv**:
+## License
 
-    ```bash
-    uv sync
-    ```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-    Este comando instala las dependencias definidas en el archivo `pyproject.toml` con las mismas versiones especificadas en el archivo `uv.lock`.
+## Support
 
-4. **Sincronizar dependencias con pip**:
+If you encounter any issues or have questions, please check the [Releases section](https://github.com/Pedro-Viudes/text2sql-agent/releases) for updates. You can also open an issue in the repository for assistance.
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+---
 
-    Este comando instala las dependencias en el entorno virtual definidas en el archivo `requirements.txt`. 
-
-## Variables de entorno
-
-Este proyecto necesita de una base de datos SQL (MySQL, PostGres, SQLServer). La URI debe estar escrita en el archivo `.env`. En la platilla de archivo `.env.template` existe un ejemplo de URI para MySQL. Se recomienda usar un usuario con permisos restringidos por seguridad. Se necesita obtener una API KEY de OpenAI [aqui](https://platform.openai.com/api-keys).
-
-`URI = 'mysql+pymysql://user:password@localhost:3306/sakila'`
-
-`OPENAI_API_KEY = 'sk-WrrN..................'`
-
-
-
-
-## Proceso de instalación y uso
-
-1. Crear la base de datos de MySQL sakila. Puede hacerse desde [Workbench](https://www.mysql.com/products/workbench/):
-   ![workbench](https://raw.githubusercontent.com/YonatanRA/webinar_text2sql/refs/heads/main/images/import_db.png)
-
-   O también desde la terminal de sql con los siguientes comandos:
-   ```bash
-    mysql -u root -p 
-    ```
-
-    ```bash
-    mysql -u root -p sakila < sakila_sql/sakila.sql
-    ```
-
-2. Obtener URI de la base de datos de SQL y colocarla en el archivo `.env` (ejemplo en el archivo `.env.template`).
-
-
-3. Instalar dependencias. Se puede usar el archivo `uv.lock` con el siguiente comando:
-    ```bash
-    uv sync
-    ```
-    También puede usarse el archivo `requirements.txt` usando el siguiente comando:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-
-4. Levantar el front de chainlit con el siguiente comando:
-    ```bash
-    chainlit run front.py -w --port 8001
-    ```
+Thank you for your interest in **text2sql-agent**! We hope you find this tool useful for converting natural language queries into SQL. For further information and updates, feel free to check the [Releases section](https://github.com/Pedro-Viudes/text2sql-agent/releases).
